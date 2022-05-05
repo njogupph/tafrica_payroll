@@ -1,0 +1,76 @@
+{
+ "category": "Modules",
+ "charts": [],
+ "creation": "2022-05-05 11:39:40.166783",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "icon": "drag",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "TransAfrica Reports",
+ "links": [],
+ "modified": "2022-05-05 11:48:39.314960",
+ "modified_by": "Administrator",
+ "module": "Transafrica Payroll",
+ "name": "TransAfrica Reports",
+ "onboarding": "",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "",
+   "label": "NHIF Report",
+   "link_to": "NHIF Report",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "NSSF Report",
+   "link_to": "NSSF Report",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "HELB Report",
+   "link_to": "HELB Report",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Payroll Register",
+   "link_to": "Payroll Register",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Bank Payroll Advice",
+   "link_to": "Bank Payroll Advice",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "P9A Tax Deduction Card",
+   "link_to": "P9A Tax Deduction Card",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Sales Tax Report",
+   "link_to": "Sales Tax Report",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Purchase Tax Report",
+   "link_to": "Purchase Tax Report",
+   "type": "Report"
+  }
+ ],
+ "shortcuts_label": "Your Shortcuts"
+}
