@@ -1,3 +1,6 @@
+#  Copyright (c) 2022. Christopher Njogu
+#  All rights reserved.
+
 from setuptools import setup, find_packages
 
 with open("requirements.txt") as f:

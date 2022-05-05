@@ -1,3 +1,6 @@
+#  Copyright (c) 2022. Christopher Njogu
+#  All rights reserved.
+
 from . import __version__ as app_version
 
 app_name = "transafrica_payroll"

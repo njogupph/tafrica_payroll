@@ -1,0 +1,23 @@
+/* Copyright (c) 2022. Christopher Njogu */
+/* All rights reserved. */
+
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+    padding:0px;
+    margin:0px;
+}
+table.table-fit thead th, table.table-fit tfoot th {
+    width: auto !important;
+    padding:0px;
+    margin:0px;
+}
+table.table-fit tbody td, table.table-fit tfoot td {
+    width: auto !important;
+    padding:0px;
+    margin:0px;
+}
+table{
+    cellpadding:0px;
+    cellspacing:0px;
+}
