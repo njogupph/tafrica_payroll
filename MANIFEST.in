@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include transafrica_payroll *.css
+recursive-include transafrica_payroll *.csv
+recursive-include transafrica_payroll *.html
+recursive-include transafrica_payroll *.ico
+recursive-include transafrica_payroll *.js
+recursive-include transafrica_payroll *.json
+recursive-include transafrica_payroll *.md
+recursive-include transafrica_payroll *.png
+recursive-include transafrica_payroll *.py
+recursive-include transafrica_payroll *.svg
+recursive-include transafrica_payroll *.txt
+recursive-exclude transafrica_payroll *.pyc
