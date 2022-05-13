@@ -107,10 +107,7 @@ def execute(filters=None):
                                                               month_start_date, month_end_date,
                                                               p9a_tax_deduction_card_type[10],
                                                               currency, company_currency)
-            personal_relief_amt = get_p9a_tax_deduction_card_amt(filters, emp.name,
-                                                              month_start_date, month_end_date,
-                                                              p9a_tax_deduction_card_type[11],
-                                                              currency, company_currency)
+            personal_relief_amt = 2400
             insurance_relief_amt = get_p9a_tax_deduction_card_amt(filters, emp.name,
                                                               month_start_date, month_end_date,
                                                               p9a_tax_deduction_card_type[12],
