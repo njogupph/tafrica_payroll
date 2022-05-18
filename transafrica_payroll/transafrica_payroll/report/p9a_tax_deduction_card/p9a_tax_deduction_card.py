@@ -88,8 +88,10 @@ def execute(filters=None):
                                                               currency, company_currency)
             if (basic_salary_amt > 0):
                 e3_defined_contribution_retirement_scheme_amt = 20000
+		personal_relief_amt = 2400
             else:
                 e3_defined_contribution_retirement_scheme_amt = 0
+		personal_relief_amt = 0
             lowest_of_column_e = min(e1_defined_contribution_retirement_scheme_amt, 
                                      e2_defined_contribution_retirement_scheme_amt,
                                      e3_defined_contribution_retirement_scheme_amt)
@@ -107,7 +109,6 @@ def execute(filters=None):
                                                               month_start_date, month_end_date,
                                                               p9a_tax_deduction_card_type[10],
                                                               currency, company_currency)
-            personal_relief_amt = 2400
             insurance_relief_amt = get_p9a_tax_deduction_card_amt(filters, emp.name,
                                                               month_start_date, month_end_date,
                                                               p9a_tax_deduction_card_type[12],
