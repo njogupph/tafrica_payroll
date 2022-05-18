@@ -19,11 +19,39 @@
 <hr>
 <table class="table table-sm  table-bordered table-fit">
 	<thead>
-		<tr>
-			{% for(var i=0, l=report_columns.length; i<l; i++) { %}
-				<th class="text-right">{%= report_columns[i].label %}</th>
-			{% } %}
-		</tr>
+	<tr>
+            <td>Month</td>
+            <td>Basic Salary (Kshs.)</td>
+            <td>Benefits NonCash (Kshs.)</td>
+            <td>Value of Quarters (Kshs.)</td>
+            <td>Total Gross Pay (Kshs.)</td>
+            <td colspan="3">Defined Contribution Retirement Scheme (Kshs.)</td>
+            <td>Owner Occupied Interest (Kshs.)</td>
+            <td>Retirement Contribution and Owner Occupied Interest (Kshs.)</td>
+            <td>Chargeable Pay (Kshs.)</td>
+            <td>Tax Charged (Kshs.)</td>
+            <td>Personal Relief (Kshs.)</td>
+            <td>Insurance Relief (Kshs.)</td>
+            <td>PAYE Tax (Kshs.)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+            <td>D</td>
+            <td>E1 30% of A</td>
+            <td>E2 Actual</td>
+            <td>E3 Defined</td>
+            <td>F Amount of Interest</td>
+            <td>G</td>
+            <td>H</td>
+            <td>J</td>
+            <td>K</td>
+            <td></td>
+            <td>L</td>
+
+        </tr>
 	</thead>
 	<tbody>
 		{% for(var j=0, k=data.length; j<k; j++) { %}
@@ -47,7 +75,51 @@
 		{% } %}
 	</tbody>
 </table>
-<hr>
-		<img src="assets/transfrica_payroll/images/p9.png" />
-		<br>
-<p class="text-right text-muted">{{ __("Printed On") }} {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>
+<div class="container-fluid palechini">
+        <div class="row">
+            <div class="col-md-offset-6 col-md-6">
+                <p><b>TOTAL TAX (COL. L) KSHS </b></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="width:50%">
+                <p>
+                    To be completed by Employer at the end of year
+                    <br>
+                    <b> TOTAL CHARGEABLE PAY (COL. H) KSHS. </b>
+                    <br>
+
+                </p>
+                <p>
+                    IMPORTANT
+                    <br> 1. Use P9:
+                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (a) For all liable employees and where director/employee received Benefits in addition to cash emoluments.
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (b) Where an employee is eligible to deduction on owner occupier interest.
+                    <br> 2.&nbsp;&nbsp;&nbsp;&nbsp; (a) Allowable interest in respect of any month must not exceed Kshs. 12,500/= or Kshs. 150,000 per year. <br>
+                    <b>(See back of this card for further information required by the Department.) </b>
+                </p>
+
+            </div>
+            <div class="col-md-6" style="width:50%">
+                <p>
+                    Attach:
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(i) Photostat copy of interest certificate and statement of account from the Financial Institution.
+                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ii) The DECLARATION duly signed by the employee.
+
+                </p>
+                <p>
+                    <b>
+                        NAMES OF FINANCIAL INSTITUTION ADVANCING MORTGAGE LOAN
+                        <br>
+                        L.R. NO. OF OWNER OCCUPIED PROPERTY:..........................................................................................
+                        <br>
+                        DATE OF OCCUPATION OF HOUSE:..........................................................................................................
+
+                    </b>
+                </p>
+            </div>
+        </div>
+
+
+    </div>
