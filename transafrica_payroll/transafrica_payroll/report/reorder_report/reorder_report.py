@@ -35,6 +35,7 @@ def execute(filters=None):
         price_list = str(item_currency) + " " + str(item_price)
         stock_balance = get_balance_qty_from_sle(item.item_code, select_warehouse)
         pending_po = pending_purchase_orders(item.item_code)
+        total_stocks_available = flt(stock_balance) + flt(pending_po)
         two_months_ago = str(add_days(today(), -60))
         sales_two_months = get_last_two_months(item.item_code, two_months_ago)
         shortfall = (flt(item.reorder_level) - flt(stock_balance))
@@ -51,7 +52,7 @@ def execute(filters=None):
                 price_list,
                 stock_balance,
                 pending_po,
-                stock_balance,
+                total_stocks_available,
                 sales_two_months,
                 item.reorder_level,
                 shortfall,
