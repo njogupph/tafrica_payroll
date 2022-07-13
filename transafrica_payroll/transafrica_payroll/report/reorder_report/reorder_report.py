@@ -40,9 +40,9 @@ def execute(filters=None):
         shortfall = (flt(item.reorder_level) - flt(stock_balance))
         qty_to_reorder = 0
         if shortfall > 0:
-            qty_to_reorder = item.minimum_reorder_qty
+            qty_to_reorder = flt(item.minimum_reorder_qty)
 
-        total_amt = qty_to_reorder * item_price
+        total_amt = flt(qty_to_reorder) * flt(item_price)
 
         data.append(
             [
