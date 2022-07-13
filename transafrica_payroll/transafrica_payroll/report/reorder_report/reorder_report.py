@@ -38,7 +38,7 @@ def execute(filters=None):
         total_stocks_available = flt(stock_balance) + flt(pending_po)
         two_months_ago = str(add_days(today(), -60))
         sales_two_months = get_last_two_months(item.item_code, two_months_ago)
-        shortfall = (flt(item.reorder_level) - flt(stock_balance))
+        shortfall = (flt(item.reorder_level) - flt(total_stocks_available))
         qty_to_reorder = 0
         if shortfall > 0:
             qty_to_reorder = flt(item.minimum_reorder_qty)
