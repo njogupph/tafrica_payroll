@@ -14,7 +14,7 @@
  "is_standard": 1,
  "label": "TransAfrica Reports",
  "links": [],
- "modified": "2022-05-05 11:48:39.314960",
+ "modified": "2022-07-06 08:24:34.512703",
  "modified_by": "Administrator",
  "module": "Transafrica Payroll",
  "name": "TransAfrica Reports",
@@ -69,6 +69,18 @@
    "doc_view": "",
    "label": "Purchase Tax Report",
    "link_to": "Purchase Tax Report",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Bank Reconciliation Statement (Combined)",
+   "link_to": "Bank Reconciliation Statement (Combined)",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "ReOrder Report",
+   "link_to": "ReOrder Report",
    "type": "Report"
   }
  ],
