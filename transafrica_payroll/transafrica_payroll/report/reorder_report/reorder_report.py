@@ -84,21 +84,27 @@ def get_columns():
 
 def get_item_info(filters):
     from erpnext.stock.report.stock_ledger.stock_ledger import get_item_group_condition
-
-    conditions = []
-    if filters.get("brand"):
-        conditions.append("item.brand=%(brand)s")
-    conditions.append("is_stock_item = 1")
-
-    return frappe.db.sql(
-        """select name, item_name,item_code,minimum_reorder_qty,reorder_level, description, brand, item_group,
-        safety_stock, lead_time_days from `tabItem` item where {}""".format(
-            " and ".join(conditions)
-        ),
-        filters,
-        as_dict=1,
-    )
-
+    nd = 'Tz%'
+    if filters.get("company") == "TransAfrica Water Systems Limited":
+        return frappe.db.sql(
+            """select name, item_name,item_code,minimum_reorder_qty,reorder_level, description, brand, item_group,
+            safety_stock, lead_time_days from `tabItem` item
+            where item.brand=%s
+            and is_stock_item = 1
+            and item_code not like %s
+            """, (filters.get("brand"), nd),
+            as_dict=1,
+        )
+    if filters.get("company") == "TAW TZ":
+        return frappe.db.sql(
+            """select name, item_name,item_code,minimum_reorder_qty,reorder_level, description, brand, item_group,
+            safety_stock, lead_time_days from `tabItem` item 
+            where item.brand=%s 
+            and is_stock_item = 1
+            and item_code like %s
+            """, (filters.get("brand"), nd),
+            as_dict=1,
+        )
 
 def get_consumed_items(condition):
     purpose_to_exclude = [

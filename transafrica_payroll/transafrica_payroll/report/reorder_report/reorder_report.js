@@ -39,13 +39,16 @@ frappe.query_reports["ReOrder Report"] = {
 			"label": __("Brand"),
 			"fieldtype": "Link",
 			"width": "80",
-			"options": "Brand"
+			"options": "Brand",
+			"reqd": 1
+
 		},
 		{
 			"fieldname": "warehouse",
 			"label": __("Warehouse"),
 			"fieldtype": "Link",
 			"width": "100",
+			"reqd": 1,
 			"options": "Warehouse"
 		}
 	],
