@@ -23,7 +23,6 @@ frappe.query_reports["Consolidated Accounts Balances"] = {
 				return {
 					"query": "erpnext.controllers.queries.get_account_list",
 					"filters": [
-						// ['Account', 'account_type', 'in', 'Bank, Cash'],
 						['Account', 'is_group', '=', 1],
 						['Account', 'disabled', '=', 0],
 						['Account', 'company', '=', company],
