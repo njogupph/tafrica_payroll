@@ -14,7 +14,7 @@ def execute(filters=None):
     start_date = datetime.strptime(filters.get("start_date"), '%Y-%m-%d')
     date_range = (end_date - start_date).days + 1
     columns = []
-    columns = ["Cost Center"] + ["Narration"] + ["Cumulative"] + [
+    columns = ["Cost Center"] + ["Narration"] + [
         str((start_date + timedelta(days=dt)).strftime('%Y-%m-%d')) for dt in
         range(date_range)]
     data = []
@@ -98,7 +98,7 @@ def get_p_invoices(filters=None):
     start_date = datetime.strptime(filters.get("start_date"), '%Y-%m-%d')
     date_range = (end_date - start_date).days + 1
     columns = []
-    columns = ["Cost Center"] + ["Narration"] + ["Cumulative"] + [
+    columns = ["Cost Center"] + ["Narration"] + [
         str((start_date + timedelta(days=dt)).strftime('%Y-%m-%d')) for dt in
         range(date_range)]
     data = []
