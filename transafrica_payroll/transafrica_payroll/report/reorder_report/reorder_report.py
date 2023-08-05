@@ -37,7 +37,14 @@ def execute(filters=None):
         pending_po = pending_purchase_orders(item.item_code)
         total_stocks_available = flt(stock_balance) + flt(pending_po)
         two_months_ago = str(add_days(today(), -60))
+        three_months_ago = str(add_days(today(), -90))
         sales_two_months = get_last_two_months(item.item_code, two_months_ago)
+        local_pr_two_months = get_last_two_months_local(item.item_code, two_months_ago)
+        import_pr_two_months = get_last_two_months_import(item.item_code, three_months_ago)
+        last_import_pr_date = get_last_import_purchase_receipt_date(item.item_code)
+        last_import_pr_qty = get_last_purchase_receipt_import_qty(item.item_code)
+        wo_two_months = get_last_two_months_work_order_qty(item.item_code, two_months_ago)
+        total_consumption = sales_two_months + wo_two_months
         shortfall = (flt(item.reorder_level) - flt(total_stocks_available))
         qty_to_reorder = 0
         if shortfall > 0:
@@ -54,6 +61,12 @@ def execute(filters=None):
                 pending_po,
                 total_stocks_available,
                 sales_two_months,
+                wo_two_months,
+                total_consumption,
+                import_pr_two_months,
+                last_import_pr_qty,
+                last_import_pr_date,
+                local_pr_two_months,
                 item.reorder_level,
                 shortfall,
                 item.minimum_reorder_qty,
@@ -71,14 +84,20 @@ def get_columns():
         _("Model") + ":Data:120",
         _("Buying Price") + ":Data:120",
         _("Closing Stock") + ":Float:120",
-        _("Pending Purchase Order") + ":Float:120",
-        _("Total Stocks Available") + ":Float:120",
-        _("Last 2 Months Sales") + ":Float:120",
-        _("Reorder Level") + ":Float:120",
-        _("Shortfall") + ":Float:120",
-        _("Minimum Reorder Qty") + ":Float:120",
-        _("Quantity to order") + ":Float:120",
-        _("Order Value") + ":Data:120",
+        _("Pending Purchase Order") + ":Float:190",
+        _("Total Stocks Available") + ":Float:190",
+        _("Last 2 Months Sales") + ":Float:190",
+        _("Last 2 Months Production") + ":Float:240",
+        _("Total Consumption(Sales + Production )") + ":Float:290",
+        _("Last 3 Months Import Purchase(s) ") + ":Float:290",
+        _("Last Import Purchase") + ":Float:190",
+        _("Last Import Purchase Date") + ":Date:190",
+        _("Last 2 Months Local Purchase(s) ") + ":Float:190",
+        _("Reorder Level") + ":Float:190",
+        _("Shortfall") + ":Float:190",
+        _("Minimum Reorder Qty") + ":Float:190",
+        _("Quantity to order") + ":Float:190",
+        _("Order Value") + ":Data:190"
     ]
 
 
@@ -105,6 +124,7 @@ def get_item_info(filters):
             """, (filters.get("brand"), nd),
             as_dict=1,
         )
+
 
 def get_consumed_items(condition):
     purpose_to_exclude = [
@@ -297,3 +317,102 @@ def get_last_two_months(item_code, upto_date):
         (item_code, upto_date),
     )
     return flt(si_items[0][0]) if si_items else 0.00
+
+
+
+"""
+Get the local purchases for the last two months 
+
+"""
+
+
+def get_last_two_months_local(item_code, upto_date):
+    si_items = frappe.db.sql(
+        """select sum(si_item.stock_qty)
+        from `tabPurchase Receipt` si, `tabPurchase Receipt Item` si_item
+        where si.name = si_item.parent and si.docstatus = 1 
+        and (si.status not in ('Cancelled','Return Issued','Draft'))
+        and si_item.item_code = %s
+        and si.posting_date >= %s
+        and si.purchase_jurisdiction_type = "Local"
+        """,
+        (item_code, upto_date),
+    )
+    return flt(si_items[0][0]) if si_items else 0.00
+
+
+"""
+Get the import purchases for the last two months 
+
+"""
+
+
+def get_last_two_months_import(item_code, upto_date):
+    si_items = frappe.db.sql(
+        """select sum(si_item.stock_qty)
+        from `tabPurchase Receipt` si, `tabPurchase Receipt Item` si_item
+        where si.name = si_item.parent and si.docstatus = 1 
+        and (si.status not in ('Cancelled','Return Issued','Draft'))
+        and si_item.item_code = %s
+        and si.posting_date >= %s
+        and si.purchase_jurisdiction_type = "Import"
+        """,
+        (item_code, upto_date),
+    )
+    return flt(si_items[0][0]) if si_items else 0.00
+
+
+"""
+    Get the Last IMPORT Purchase Receipt
+"""
+
+
+def get_last_purchase_receipt_import_qty(item_code):
+    si_items = frappe.db.sql(
+        """select si_item.stock_qty
+        from `tabPurchase Receipt` si, `tabPurchase Receipt Item` si_item
+        where si.name = si_item.parent and si.docstatus = 1 
+        and (si.status not in ('Cancelled','Return Issued','Draft'))
+        and si_item.item_code = %s
+        and si.purchase_jurisdiction_type = "Import"
+        order by si.posting_date desc
+        limit 1
+        """,
+        (item_code,)
+    )
+    return flt(si_items[0][0]) if si_items else 0.00
+
+
+
+"""
+    Get the Last IMPORT Purchase Receipt Posting Date
+"""
+
+
+def get_last_import_purchase_receipt_date(item_code):
+    si_items = frappe.db.sql("""
+            select si.posting_date
+            from `tabPurchase Receipt` si, `tabPurchase Receipt Item` si_item
+            where si.name = si_item.parent 
+              and si.docstatus = 1 
+              and si.status not in ('Cancelled', 'Return Issued', 'Draft')
+              and si_item.item_code = %s
+              and si.purchase_jurisdiction_type = "Import"
+            order by si.posting_date desc
+            limit 1
+        """, (item_code,))
+    return si_items[0][0] if si_items else ""
+
+
+def get_last_two_months_work_order_qty(item_code, upto_date):
+    wo_items = frappe.db.sql(
+        """select sum(wo_item.consumed_qty)
+        from `tabWork Order` wo, `tabWork Order Item` wo_item
+        where wo.name = wo_item.parent and wo.docstatus = 1 
+        and (wo.status not in ('Cancelled', 'Draft'))
+        and wo_item.item_code = %s
+        and wo.modified >= DATE_SUB(%s, INTERVAL 2 MONTH)
+        """,
+        (item_code, upto_date),
+    )
+    return flt(wo_items[0][0]) if wo_items else 0.00
