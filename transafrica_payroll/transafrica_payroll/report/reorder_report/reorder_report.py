@@ -110,6 +110,7 @@ def get_item_info(filters):
             safety_stock, lead_time_days from `tabItem` item
             where item.brand=%s
             and is_stock_item = 1
+            and disabled = 0
             and item_code not like %s
             """, (filters.get("brand"), nd),
             as_dict=1,
@@ -120,6 +121,7 @@ def get_item_info(filters):
             safety_stock, lead_time_days from `tabItem` item 
             where item.brand=%s 
             and is_stock_item = 1
+            and disabled = 0
             and item_code like %s
             """, (filters.get("brand"), nd),
             as_dict=1,
