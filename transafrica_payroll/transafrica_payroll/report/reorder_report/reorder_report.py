@@ -102,6 +102,7 @@ def get_columns():
 
 
 def get_item_info(filters):
+    """ get items per the company, stock items, and per brand, and also shouldnt be disabled"""
     from erpnext.stock.report.stock_ledger.stock_ledger import get_item_group_condition
     nd = 'Tz%'
     if filters.get("company") == "TransAfrica Water Systems Limited":
